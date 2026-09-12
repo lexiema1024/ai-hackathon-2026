@@ -19,7 +19,9 @@ pip install -r requirements.txt      # streamlit (+ pytest for tests)
 streamlit run app.py
 ```
 
-For a local run, open http://localhost:8501. The deployed demo above is already running and does not require local installation.
+For a local run, open http://localhost:8502. The deployed demo above is already running and does not require local installation.
+
+External URL: http://128.250.0.200:8502
 
 Python 3.9+ and Streamlit 1.41 or newer.
 
