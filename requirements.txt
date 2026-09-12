@@ -1,0 +1,4 @@
+# PayLens prototype — the only runtime dependency is Streamlit.
+streamlit>=1.41,<2
+# Optional, for running the test suite:
+pytest>=8
