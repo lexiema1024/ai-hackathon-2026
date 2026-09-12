@@ -1,0 +1,153 @@
+<div class="pl-page" id="top">
+  <header class="pl-nav">
+    <div class="pl-brand">
+      <span data-icon="logo"></span>
+      <span class="pl-wordmark">PayLens</span>
+      <span class="pl-proto">Prototype</span>
+    </div>
+    <button type="button" class="pl-btn pl-btn--sm" id="btn-new">New analysis</button>
+  </header>
+
+  <main>
+    <section class="pl-hero" id="hero" aria-labelledby="hero-title">
+      <div class="pl-eyebrow">Pre-contract payment risk</div>
+      <h1 class="pl-hero-title" id="hero-title">Can your small business <br>afford to take this deal?</h1>
+      <p class="pl-hero-sub">Understand how a prospective customer's payment behaviour could affect your cash flow before you sign.</p>
+      <form class="pl-search-row" id="search-form" role="search" autocomplete="off">
+        <div class="pl-search">
+          <span data-icon="search" data-size="18"></span>
+          <label class="sr-only" for="search-input">Search company name or ABN</label>
+          <input id="search-input" type="search" placeholder="Search company name or ABN" autocomplete="off" spellcheck="false">
+        </div>
+        <button type="submit" class="pl-btn pl-btn--hero" id="btn-analyse-customer">Analyse Customer</button>
+        <button type="button" class="pl-btn pl-btn--ghost" id="btn-clear" disabled>Clear</button>
+      </form>
+      <div class="pl-hero-helper"><span data-icon="shield" data-size="15"></span><span>Check a prospective customer before committing working capital.</span></div>
+    </section>
+
+    <div id="results" aria-live="polite"></div>
+
+    <div id="intro">
+      <div class="pl-quickpicks">
+        <div class="pl-quickpick-label">Or try a demo customer</div>
+        <div class="pl-chiprow" id="quickpicks"></div>
+      </div>
+      <div class="pl-steps" id="steps"></div>
+    </div>
+
+    <section id="customer" hidden></section>
+
+    <section id="deal-section" hidden>
+      <div class="pl-transition">
+        <div class="pl-transition-line"></div>
+        <div class="pl-equation">
+          <span class="pl-eq-pill"><span data-icon="user" data-size="15"></span>Customer risk</span>
+          <span class="pl-eq-sign" aria-label="is not the same as"><span data-icon="equal-not" data-size="18"></span></span>
+          <span class="pl-eq-pill pl-eq-pill--accent"><span data-icon="doc" data-size="15"></span>Contract risk</span>
+        </div>
+        <h2 class="pl-transition-title">Now assess the deal itself.</h2>
+        <p class="pl-transition-body">Customer payment behaviour is only part of the picture. The same customer can create very different exposure depending on your contract and available cash.</p>
+      </div>
+
+      <div class="pl-deal-grid">
+        <form class="pl-card pl-form" id="deal-form" novalidate>
+          <div>
+            <h3 class="pl-card-title pl-card-title--lg">Your proposed deal</h3>
+            <div class="pl-card-meta">Enter the contract you're considering. Amounts in AUD — 120,000 or 120k both work.</div>
+          </div>
+          <div class="pl-field">
+            <label class="pl-label" for="in-contract">Contract value</label>
+            <input class="pl-input" id="in-contract" inputmode="decimal" value="$120,000" data-zero="A zero-value contract creates no exposure.">
+            <div class="pl-field-hint" id="hint-contract"></div>
+          </div>
+          <div class="pl-field-row">
+            <div class="pl-field">
+              <label class="pl-label" for="in-cash">Available cash</label>
+              <input class="pl-input" id="in-cash" inputmode="decimal" value="$45,000" data-zero="No cash buffer — any delay hits immediately.">
+              <div class="pl-field-hint" id="hint-cash"></div>
+            </div>
+            <div class="pl-field">
+              <label class="pl-label" for="in-costs">Monthly operating costs</label>
+              <input class="pl-input" id="in-costs" inputmode="decimal" value="$25,000" data-zero="Runway won't be treated as a constraint.">
+              <div class="pl-field-hint" id="hint-costs"></div>
+            </div>
+          </div>
+          <div class="pl-field">
+            <span class="pl-label" id="lbl-terms">Payment terms</span>
+            <div class="pl-segmented" role="radiogroup" aria-labelledby="lbl-terms" id="in-terms" data-value="60"></div>
+          </div>
+          <div class="pl-field">
+            <div class="pl-range-head"><label class="pl-label" for="in-upfront">Upfront payment</label><span class="pl-range-val" id="val-upfront">0%</span></div>
+            <input type="range" class="pl-range" id="in-upfront" min="0" max="100" step="5" value="0">
+            <div class="pl-range-ticks"><span>0%</span><span>100%</span></div>
+            <div class="pl-field-hint" id="hint-upfront"></div>
+          </div>
+          <button type="submit" class="pl-btn pl-btn--primary pl-btn--block" id="btn-analyse-deal">Analyse My Deal</button>
+        </form>
+        <div id="exposure"></div>
+      </div>
+    </section>
+
+    <section id="sim-section" hidden>
+      <div class="pl-section-head" id="simulator">
+        <div class="pl-eyebrow">Deal restructuring simulator</div>
+        <h2 class="pl-section-title">Make this deal safer</h2>
+        <div class="pl-section-lead">Adjust the terms below to see how the structure of the deal changes your exposure.</div>
+      </div>
+      <div class="pl-card pl-sim">
+        <div class="pl-sim-head">
+          <div>
+            <h3 class="pl-sim-title">Revised terms</h3>
+            <div class="pl-sim-sub">The customer, contract value and your cash position stay the same.</div>
+          </div>
+          <div id="sim-live" aria-live="polite"></div>
+        </div>
+        <div class="pl-sim-grid">
+          <div class="pl-field">
+            <div class="pl-range-head"><label class="pl-label" for="sim-upfront">Upfront payment</label><span class="pl-range-val" id="val-sim-upfront">0%</span></div>
+            <input type="range" class="pl-range" id="sim-upfront" min="0" max="100" step="5" value="0">
+            <div class="pl-range-ticks"><span>0%</span><span>100%</span></div>
+            <div class="pl-field-hint" id="hint-sim-upfront"></div>
+          </div>
+          <div class="pl-field">
+            <span class="pl-label" id="lbl-sim-terms">Payment terms</span>
+            <div class="pl-segmented" role="radiogroup" aria-labelledby="lbl-sim-terms" id="sim-terms" data-value="60"></div>
+          </div>
+        </div>
+        <div class="pl-sim-foot">
+          <div id="suggest"></div>
+          <div class="pl-sim-actions">
+            <button type="button" class="pl-btn pl-btn--primary" id="btn-apply">Apply suggestion</button>
+            <button type="button" class="pl-btn" id="btn-reset-sim">Reset to current deal</button>
+          </div>
+        </div>
+      </div>
+      <div id="compare"></div>
+      <div class="pl-section-head">
+        <div class="pl-eyebrow">Recommendation</div>
+        <h2 class="pl-section-title">What to do next</h2>
+        <div class="pl-section-lead">Based on your revised deal. Decision support only — not financial or legal advice.</div>
+      </div>
+      <div id="recs"></div>
+    </section>
+
+    <aside class="pl-about">
+      <span class="pl-about-icon" data-icon="info"></span>
+      <div>
+        <div class="pl-about-title">About this prototype</div>
+        <div class="pl-about-body">PayLens is a decision-support prototype. Customer payment behaviour shown in this version uses demo data. Contract exposure is based on user inputs and a transparent prototype risk methodology. It is not a credit rating or financial guarantee.</div>
+        <div class="pl-about-meta"><span>Customer data: Demo dataset (mock)</span><span>Delay model: mock-logistic-v0 (demo)</span><span>Exposure method: prototype-heuristic-0.1</span></div>
+      </div>
+    </aside>
+    <details class="pl-method">
+      <summary>How the exposure score works <span data-icon="chevron" data-size="18"></span></summary>
+      <div class="pl-method-body" id="method"></div>
+    </details>
+  </main>
+
+  <footer class="pl-footer">
+    <div class="pl-footer-brand"><span data-icon="logo" data-size="22"></span>PayLens</div>
+    <div class="pl-footer-meta">Built for the 2026 Hackathon · Prototype with demo data</div>
+  </footer>
+</div>
+<div class="pl-toast" id="toast" role="status" aria-live="polite"></div>
