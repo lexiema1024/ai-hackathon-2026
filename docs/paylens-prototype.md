@@ -12,12 +12,14 @@ This is the **frontend prototype**. All customer data and the payment-delay mode
 
 ## Run it
 
+Deployed demo: http://10.12.247.232:8502
+
 ```bash
 pip install -r requirements.txt      # streamlit (+ pytest for tests)
 streamlit run app.py
 ```
 
-Then open http://localhost:8501.
+For a local run, open http://localhost:8501. The deployed demo above is already running and does not require local installation.
 
 Python 3.9+ and Streamlit 1.41 or newer.
 
